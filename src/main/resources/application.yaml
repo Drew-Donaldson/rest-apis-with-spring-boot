@@ -1,0 +1,45 @@
+spring:
+  profiles:
+    active: mongodb
+
+---
+spring:
+  config:
+    activate:
+      on-profiles: sql
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/cricketdb?createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+  application:
+    name: cricket-app
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env"
+
+---
+spring:
+  config:
+    activate:
+      on-profiles: mongodb
+  data:
+    mongodb:
+      authentication-database: admin
+      username: drew
+      password: V@c@t10n!
+      database: cricketdb
+      port: 27017
+      host: localhost
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration

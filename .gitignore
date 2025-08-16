@@ -38,8 +38,4 @@ build/
 /bin/
 .idea/
 *.iml
-.gitattributes
-mvnw
-*.cmd
-.mvn/
 src/test/
